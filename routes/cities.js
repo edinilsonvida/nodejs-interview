@@ -28,7 +28,7 @@ router.get('/new', (req, res) => {
   res.render('cities/new', { city: new City() })
 })
 
-// Create City Route
+// Rota de criação da cidade
 router.post('/',
   [
     check('name').isLength({ min: 5 }).withMessage("O nome precisa ter no mínimo 5 caracteres."),
@@ -56,6 +56,7 @@ router.post('/',
     }
   })
 
+// Rota de exibição de informações de uma cidade
 router.get('/:id', async (req, res) => {
   try {
     const city = await City.findById(req.params.id)
@@ -68,6 +69,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+// Rota para localização de uma cidade para edição
 router.get('/:id/edit', async (req, res) => {
   try {
     const city = await City.findById(req.params.id)
@@ -77,6 +79,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 })
 
+// Rota de atualização de uma cidade
 router.put('/:id',
   [
     check('name').isLength({ min: 5 }).withMessage("O nome precisa ter no mínimo 5 caracteres."),
@@ -109,6 +112,7 @@ router.put('/:id',
     }
   })
 
+// Rota de exclusão de uma cidade
 router.delete('/:id', async (req, res) => {
   let city
   try {

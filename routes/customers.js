@@ -4,7 +4,7 @@ const Customer = require('../models/customer')
 const City = require('../models/city')
 const { check, validationResult } = require('express-validator')
 
-// All Customers Route
+// Rota de pesquisa de clientes
 router.get('/', async (req, res) => {
   let query = Customer.find()
   if (req.query.id != null && req.query.id != '') {
@@ -24,12 +24,12 @@ router.get('/', async (req, res) => {
   }
 })
 
-// New Customer Route
+// Rota para exibição do formulário
 router.get('/new', async (req, res) => {
   renderNewPage(res, new Customer())
 })
 
-// Create Customer Route
+// Rota de criação do cliente
 router.post('/',
   [
     check('name').isLength({ min: 5 }).withMessage("O nome precisa ter no mínimo 5 caracteres."),
@@ -54,7 +54,7 @@ router.post('/',
     }
   })
 
-// Show Customer Route
+// Rota de exibição de informações de um cliente
 router.get('/:id', async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id)
@@ -66,7 +66,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-// Edit Customer Route
+// Rota para localização de um cliente para edição
 router.get('/:id/edit', async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.id)
@@ -76,7 +76,7 @@ router.get('/:id/edit', async (req, res) => {
   }
 })
 
-// Update Customer Route
+// Rota de atualização de um cliente
 router.put('/:id',
   [
     check('name').isLength({ min: 5 }).withMessage("O nome precisa ter no mínimo 5 caracteres."),
@@ -105,7 +105,7 @@ router.put('/:id',
     }
   })
 
-// Delete Customer Page
+// Rota de exclusão de um cliente
 router.delete('/:id', async (req, res) => {
   let customer
   try {
@@ -126,14 +126,17 @@ router.delete('/:id', async (req, res) => {
   }
 })
 
+// Formulário de adição
 async function renderNewPage(res, customer, hasError = false) {
   renderFormPage(res, customer, 'new', hasError)
 }
 
+// Formulário de edição
 async function renderEditPage(res, customer, hasError = false) {
   renderFormPage(res, customer, 'edit', hasError)
 }
 
+// Formulário para carregamento de cidades
 async function renderFormPage(res, customer, form, hasError = false) {
   try {
     const cities = await City.find({})
