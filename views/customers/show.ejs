@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    <h2>
+      <%= customer.name %>
+    </h2>
+  </div>
+  <div class="card-body">
+    <p><b>Código: </b>
+      <%= customer.id %>
+    </p>
+    <p><b>Cliente: </b>
+      <%= customer.name %>
+    </p>
+    <p><b>Cidade: </b>
+      <%= customer.city.name %>
+    </p>
+    <p><b>Data de Nascimento: </b>
+      <%= customer.birthDate.toISOString().replace(/T.*/,'').split('-').reverse().join('/') %>
+    </p>
+    <p><b>Idade: </b>
+      <%= new Date().getFullYear() - customer.birthDate.getFullYear() %>
+    </p>
+    <p><b>Gênero: </b>
+      <%= customer.gender %>
+    </p>
+    <div class="row">
+      <div class="col-md">
+        <div class="d-flex justify-content-end">
+          <a class="btn btn-secondary" href="/customers">Voltar</a>
+          <a class="btn btn-primary" href="/customers/<%= customer.id %>/edit">Editar</a>
+          <%- include('../partials/deleteForm', { url: `/customers/${customer.id}` }) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="row">
+  <div class="col-sm">
+    <label><b>Nome:</b></label>
+    <input class="form-control" type="text" name="name" value="<%= customer.name %>">
+  </div>
+  <div class="col-sm">
+    <label><b>Cidade:</b></label>
+    <select class="form-control" name="city">
+      <% cities.forEach(city=> { %>
+        <option value="<%= city.id %>" <%=city.id==customer.city ? 'selected = "selected"' : '' %> ><%= city.name %>
+        </option>
+        <% }) %>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm">
+    <label><b>Data de Nascimento:</b></label>
+    <input class="form-control" type="date" name="birthDate"
+      value="<%= (customer.birthDate == null) ? '' : customer.birthDate.toISOString().split`T`[0] %>">
+  </div>
+  <div class="col-sm">
+    <label><b>Gênero:</b></label>
+    <select class="form-control" name="gender">
+      <option value="Masculino" <% if(customer.gender=="Masculino" ){ %>selected <% } %> >Masculino</option>
+      <option value="Feminino" <% if(customer.gender=="Feminino" ){ %>selected <% } %> >Feminino</option>
+    </select>
+  </div>
+</div>

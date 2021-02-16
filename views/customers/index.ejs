@@ -1,0 +1,64 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Gerenciar Clientes</h4>
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-end">
+      <a class="btn btn-success" href="/customers/new">Adicionar</a>
+    </div>
+    <form action="/customers" method="GET">
+      <div class="row">
+        <div class="col-sm">
+          <label><b>Código:</b></label>
+          <input class="form-control" type="text" name="id" value="<%= searchOptions.id %>">
+        </div>
+        <div class="col-sm">
+          <label><b>Cliente:</b></label>
+          <input class="form-control" type="text" name="name" value="<%= searchOptions.name %>">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md">
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-warning" type="submit">Pesquisar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="table-responsive">
+      <table class="table table-hover table-sm">
+        <thead class="align-middle text-center">
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Data de Nascimento</th>
+            <th scope="col">Ação</th>
+          </tr>
+        </thead>
+        <tbody class="align-middle">
+          <% customers.forEach(customer=> { %>
+            <tr>
+              <td>
+                <%= customer.id %>
+              </td>
+              <td>
+                <%= customer.name %>
+              </td>
+              <td>
+                <%= customer.birthDate.toISOString().replace(/T.*/,'').split('-').reverse().join('/') %>
+              </td>
+              <td>
+                <div class="d-flex justify-content-end">
+                  <a class="btn btn-secondary" href="/customers/<%= customer.id %>">Detalhar</a>
+                  <a class="btn btn-primary" href="/customers/<%= customer.id %>/edit">Editar</a>
+                  <%- include('../partials/deleteForm', { url: `/customers/${customer.id}` }) %>
+                </div>
+              </td>
+            </tr>
+            <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
