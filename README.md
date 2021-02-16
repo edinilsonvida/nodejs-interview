@@ -30,7 +30,7 @@
     <li>Caso necessite, instale o "nodemon" para gerenciar as alterações da aplicação utilizando o comando "npm install
         nodemon".</li>
     <li>Acesse o arquivo ".env" para gerenciar as configurações de acesso (DATABASE_URL, NODE_ENV, PORT).</li>
-    <li>Inicie a aplicação utilizando o comando "nodemon server.js" ou "npm devStart".</li>
+    <li>Inicie a aplicação utilizando o comando "nodemon server.js".</li>
     <li>Abra o URL "http://localhost:3000" para utilizar a aplicação.</li>
 </ul>
 <h4>Informações das Coleções</h4>
